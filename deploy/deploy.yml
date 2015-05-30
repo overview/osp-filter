@@ -3,7 +3,7 @@
 - name: Deploy OSP network
   sudo: yes
   hosts:
-    - tag_osp_network
+    - tag_osp_filter
 
   roles:
-    - network
+    - filter

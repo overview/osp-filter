@@ -1,7 +1,9 @@
 
 flask
+Flask-Cache
 networkx
 uwsgi
 pgmagick
 
--e git+https://github.com/overview/osp.git#egg=osp
+-e git+https://github.com/davidmcclure/pymarc.git@ascii#egg=pymarc
+-e git+https://github.com/overview/osp.git@ranks#egg=osp

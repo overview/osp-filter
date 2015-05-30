@@ -1,9 +1,0 @@
-
-[uwsgi]
-
-base = {{ network_src }}
-module = app
-home = %(base)/env
-pythonpath = %(base)
-callable = app
-socket = 127.0.0.1:5000

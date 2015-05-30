@@ -1,5 +1,6 @@
 
 compile:
+  - copy
   - browserify
   - less
 

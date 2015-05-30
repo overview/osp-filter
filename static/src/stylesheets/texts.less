@@ -2,110 +2,60 @@
 
 #texts {
 
-  position: fixed;
-  left: @px-gutter;
-  top: 0;
-  width: @px-search-width;
-
-  // Top-level flex container.
-  .display(flex);
-  .flex-direction(column);
-
-  section {
-
-    overflow: hidden;
-
-    // Each section is also a flex container, since each contains a fixed-
-    // height header and a variable-height result list.
-    .display(flex);
-    .flex-direction(column);
-    .flex(2);
-
+  h3 {
+    margin: 0 20px 20px;
   }
 
-  // By default, hide the neighbors list.
-  section.neighbors {
-    display: none;
-  }
-
-  // Show neighbors when a node is selected.
-  &.selected {
-    section.search {
-      display: none;
-    }
-    section.neighbors {
-      display: inherit;
+  h3.hit-count {
+    color: @brand-primary;
+    span.count {
+      font-weight: bold;
     }
   }
 
-  // Fill the screen height with search / neighbors results.
-  &.expanded {
-    height: 100vh;
-    section {
-      margin-bottom: 60px;
-    }
+  th {
+    font-size: 12px;
+    white-space: nowrap;
+    text-align: center;
   }
 
-  // Loading icons.
-  i.spinner {
-    font-size: 7em;
-    color: @color-hl;
+  th.text {
+    text-align: left;
+  }
+
+  tr {
+    cursor: pointer;
+  }
+
+  td {
+    vertical-align: middle !important;
+    padding: 10px !important;
+  }
+
+  td.rank, td.count, td.score {
+    width: 1%;
+    text-align: center;
+    font-size: 18px;
+  }
+
+  td.rank {
+    font-weight: 300;
+    font-size: 2em;
+  }
+
+  td.score {
+    font-weight: 600;
+  }
+
+  div.title {
+    font-weight: bold;
+    font-size: 18px;
   }
 
 }
 
-.text-list {
-
-  .dark-panel();
-  .border-radius(2px);
-
-  overflow: scroll;
-  font-weight: 300;
-  font-size: 13px;
-
-  table {
-
-    margin: 0;
-
-    th {
-      font-size: 10px;
-      text-transform: uppercase;
-    }
-
-    tr.text-row {
-
-      &:hover {
-        cursor: pointer;
-        // Pop the title on hover.
-        .title, .title em {
-          color: @color-hl;
-        }
-      }
-
-      td {
-        border-color: @color-bg;
-      }
-
-      td.count {
-        text-align: center;
-        vertical-align: middle;
-      }
-
-      td.icon {
-        padding-right: 0;
-      }
-
-      span.title {
-        font-weight: bold;
-      }
-
-      em {
-        font-style: normal;
-        color: @brand-primary;
-      }
-
-    }
-
-  }
-
+i.spinner {
+  margin: 0 20px 20px;
+  font-size: 6em;
+  color: @color-blue;
 }

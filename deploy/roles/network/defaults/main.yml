@@ -1,8 +1,0 @@
----
-
-network_repo: https://github.com/overview/osp-network.git
-network_branch: master
-network_src: /home/{{ ansible_ssh_user }}/osp-network
-
-uwsgi_config: /etc/uwsgi
-supervisor_autostart: true

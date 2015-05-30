@@ -1,0 +1,48 @@
+---
+
+- name: Deploy the code
+  git:
+    repo: '{{ filter_repo }}'
+    version: '{{ filter_branch }}'
+    dest: '{{ filter_src }}'
+
+- name: Check if a virtualenv exists
+  register: env
+  stat:
+    path: '{{ filter_src }}/env'
+
+# pyvenv is broken on Ubuntu 14.04.
+- name: Create a Python 3 virtualenv, if necessary
+  when: env.stat.isdir is not defined
+  command: virtualenv --python=/usr/bin/python3.4 env
+  args:
+    chdir: '{{ filter_src }}'
+
+- name: Check for the wheelhouse
+  register: wh
+  stat:
+    path: '{{ filter_src }}/wheelhouse'
+
+- name: Deploy the wheelhouse
+  when: osp_wheelhouse != '' and not wh.stat.exists
+  unarchive:
+    src: '{{ osp_wheelhouse }}'
+    dest: '{{ filter_src }}'
+
+- name: Install pip dependencies
+  command: env/bin/pip3 install -r requirements.txt --find-links=wheelhouse
+  args:
+    chdir: '{{ filter_src }}'
+
+- name: NPM install
+  command: npm install
+  args:
+    chdir: "{{ filter_src }}"
+
+- name: Build the application
+  command: grunt compile:min
+  args:
+    chdir: "{{ filter_src }}"
+
+- name: Restart the application
+  shell: supervisorctl reload

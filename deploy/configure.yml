@@ -3,7 +3,7 @@
 - name: Configure OSP network
   sudo: yes
   hosts:
-    - tag_osp_network
+    - tag_osp_filter
 
   vars_files:
     - vars/elasticsearch.yml
@@ -14,5 +14,6 @@
     - postgres
     - nodejs
     - elasticsearch
+    - redis
     - nginx
     - supervisor

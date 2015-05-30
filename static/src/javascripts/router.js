@@ -7,7 +7,7 @@ module.exports = Backbone.Router.extend({
 
 
   routes: {
-    ':x/:y/:z': 'xyz'
+    '': 'index'
   },
 
 
@@ -22,18 +22,10 @@ module.exports = Backbone.Router.extend({
 
 
   /**
-   * Focus on a location.
-   *
-   * @param {String} x
-   * @param {String} y
-   * @param {String} z
+   * TODO|dev
    */
-  xyz: function(x, y, z) {
-    this.flux.actions.route.xyz(
-      Number(x),
-      Number(y),
-      Number(z)
-    );
+  index: function() {
+    // TODO
   }
 
 

@@ -4,5 +4,5 @@ ec2_region: us-east-1
 ec2_group: osp-ui
 ec2_image: ami-9eaa1cf6
 
-ec2_instance_type: m3.medium
-ec2_volume_size: 20
+ec2_instance_type: c3.xlarge
+ec2_volume_size: 100

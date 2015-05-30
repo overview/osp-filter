@@ -18,7 +18,7 @@ var flux = module.exports = new Fluxxor.Flux(
 
 React.render(
   <App flux={flux} />,
-  document.getElementById('network')
+  document.getElementById('search')
 );
 
 

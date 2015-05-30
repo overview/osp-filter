@@ -1,0 +1,21 @@
+
+server {
+
+  listen 80;
+  server_name localhost;
+  charset utf-8;
+
+  location ^~ /static/ {
+    root {{ filter_src }};
+  }
+
+  location / {
+    try_files $uri @network;
+  }
+
+  location @network {
+    include uwsgi_params;
+    uwsgi_pass 127.0.0.1:5000;
+  }
+
+}

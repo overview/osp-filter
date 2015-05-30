@@ -7,6 +7,8 @@ osp_numprocs: 4
 osp_data_host: localhost
 osp_init_db: yes
 
+osp_wheelhouse: '{{ lookup("env", "OSP_WHEELHOUSE") }}'
+
 osp_profile:
   - . osp/env/bin/activate
 

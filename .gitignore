@@ -1,7 +1,5 @@
 env
 node_modules
-bower_components
 static/dist
-static/tiles
 *.egg-info
-*.gexf
+*.sql

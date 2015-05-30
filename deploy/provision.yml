@@ -29,11 +29,11 @@
 
         exact_count: 1
         instance_tags:
-          Name: osp-network
-          Environment: osp-network
-          osp: network
+          Name: osp-filter
+          Environment: osp-filter
+          osp: filter
         count_tag:
-          osp: network
+          osp: filter
 
     - name: Attach the OSP volume
       ec2_vol:

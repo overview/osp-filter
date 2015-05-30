@@ -5,12 +5,12 @@ module.exports = {
   options: {
     transform: [
       'reactify',
-      'browserify-shim'
+      'jadeify'
     ],
     watch: true,
-    browserifyOptions: {
-      debug: true
-    }
+    //browserifyOptions: {
+      //debug: true
+    //}
   },
 
   dist: {
