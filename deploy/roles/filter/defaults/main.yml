@@ -1,7 +1,7 @@
 ---
 
-filter_repo: https://github.com/overview/osp-network.git
-filter_branch: search
+filter_repo: https://github.com/overview/osp-filter.git
+filter_branch: master
 filter_src: /home/{{ ansible_ssh_user }}/osp-filter
 
 uwsgi_config: /etc/uwsgi
