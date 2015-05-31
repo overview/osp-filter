@@ -115,12 +115,13 @@ def rank_texts(keywords=None, state=None, institution=None):
         record = r['record']
 
         texts.append({
-            'id':       record.id,
-            'title':    prettify_field(record.marc.title()),
-            'author':   prettify_field(record.marc.author()),
-            'rank':     r['rank'],
-            't_count':  record.metadata['citation_count'],
-            'f_count':  record.count,
+            'id':           record.id,
+            'title':        prettify_field(record.marc.title()),
+            'author':       prettify_field(record.marc.author()),
+            'publisher':    prettify_field(record.marc.publisher()),
+            'rank':         r['rank'],
+            't_count':      record.metadata['citation_count'],
+            'f_count':      record.count,
         })
 
     return {

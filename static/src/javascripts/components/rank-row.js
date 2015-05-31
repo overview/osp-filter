@@ -54,6 +54,8 @@ module.exports = React.createClass({
 
           <div className="author">
             {this.state.text.get('author')}
+            {' '}&bull;{' '}
+            {this.state.text.get('publisher')}
           </div>
 
         </td>
