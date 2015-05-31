@@ -11,7 +11,7 @@ module.exports = Fluxxor.createStore({
     QUERY_KEYWORDS: 'queryKeywords',
     QUERY_STATE: 'queryState',
     QUERY_INSTITUTION: 'queryInstitution',
-    QUERY_SEARCH: 'search'
+    QUERY_METADATA: 'search'
   },
 
 
@@ -120,6 +120,39 @@ module.exports = Fluxxor.createStore({
     this.req = request
     .get('/texts/rank')
     .query(this.query)
+    .end(function(err, res) {
+
+      // Show the new rows.
+      self.results = res.body;
+      self.emit('change');
+
+    });
+
+  },
+
+
+  /**
+   * Search metadata.
+   *
+   * @param {String} query
+   */
+  search: function(query) {
+
+    var self = this;
+
+    // Clear filters.
+    this.query = {};
+
+    // Cancel an in-flight request.
+    if (this.req) this.req.abort();
+
+    // Show spinner.
+    this.results = null;
+    this.emit('change');
+
+    this.req = request
+    .get('/texts/search')
+    .query({query: query})
     .end(function(err, res) {
 
       // Show the new rows.

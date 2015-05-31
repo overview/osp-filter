@@ -48,14 +48,22 @@ module.exports = React.createClass({
 
         <td className="text">
 
-          <div className="title">
-            {this.state.text.get('title')}
-          </div>
+          <div className="title" dangerouslySetInnerHTML={{
+            __html: this.state.text.get('title')
+          }}></div>
 
           <div className="author">
-            {this.state.text.get('author')}
+
+            <span dangerouslySetInnerHTML={{
+              __html: this.state.text.get('author')
+            }}></span>
+
             {' '}&bull;{' '}
-            {this.state.text.get('publisher')}
+
+            <span dangerouslySetInnerHTML={{
+              __html: this.state.text.get('publisher')
+            }}></span>
+
           </div>
 
         </td>

@@ -4,6 +4,7 @@ var React = require('react');
 var Fluxxor = require('fluxxor');
 
 var RankList = require('./rank-list');
+var Search = require('./search');
 var QueryKeywords = require('./query-keywords');
 var QueryState = require('./query-state');
 var QueryInstitution = require('./query-inst');
@@ -40,6 +41,7 @@ module.exports = React.createClass({
 
             </div>
 
+            <Search />
             <QueryKeywords />
             <QueryState />
             <QueryInstitution />
