@@ -40,6 +40,17 @@ def api_rank_texts():
     return jsonify(texts)
 
 
+@app.route('/texts/search')
+def api_search_texts():
+
+    """
+    Search texts.
+    """
+
+    texts = search_texts(request.args.get('query'))
+    return jsonify(texts)
+
+
 @app.route('/institutions/load')
 def api_load_institutions():
 
@@ -131,6 +142,79 @@ def rank_texts(keywords=None, state=None, institution=None):
 
 
 @cache.memoize()
+def search_texts(q=None):
+
+    """
+    Search metadata.
+
+    Args:
+        q (str): The search query.
+
+    Returns:
+        list: A ranked list of texts.
+    """
+
+    # Search all fields when query is provided.
+    if q:
+        query = {
+            'multi_match': {
+                'query': q,
+                'fields': ['title', 'author', 'publisher'],
+                'type': 'phrase_prefix'
+            }
+        }
+
+    # If the query is empty, load all documents.
+    else:
+        query = {
+            'match_all': {}
+        }
+
+    results = config.es.search('osp', 'record', body={
+        'query': query,
+        'size': 100,
+        'sort': [{
+            'count': {
+                'order': 'desc'
+            }
+        }],
+        'highlight': {
+            'fields': {
+                'title': {
+                    'number_of_fragments': 1,
+                    'fragment_size': 1000
+                },
+                'author': {
+                    'number_of_fragments': 1,
+                    'fragment_size': 1000
+                },
+                'publisher': {
+                    'number_of_fragments': 1,
+                    'fragment_size': 1000
+                }
+            }
+        }
+    })
+
+    texts = []
+    for h in results['hits']['hits']:
+        texts.append({
+            'id':           h['_id'],
+            'title':        highlight(h, 'title'),
+            'author':       highlight(h, 'author'),
+            'publisher':    highlight(h, 'publisher'),
+            'rank':         h['_source']['rank'],
+            't_count':      h['_source']['count'],
+            'f_count':      h['_source']['count'],
+        })
+
+    return {
+        'count': results['hits']['total'],
+        'texts': texts
+    }
+
+
+@cache.memoize()
 def load_institutions(query, size=100):
 
     """
@@ -168,6 +252,25 @@ def load_institutions(query, size=100):
         })
 
     return results
+
+
+def highlight(hit, field):
+
+    """
+    Try to get a hit highlight for a field. If none is available, return the
+    raw field value.
+
+    Args:
+        hit (dict): The raw Elasticsearch hit.
+        field (str): The field name.
+
+    Returns: string
+    """
+
+    try:
+        return hit['highlight'][field]
+    except:
+        return hit['_source'][field]
 
 
 if __name__ == '__main__':
