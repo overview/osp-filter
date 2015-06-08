@@ -42,7 +42,7 @@ module.exports = React.createClass({
         <input
           className="search form-control"
           type="text"
-          placeholder="Search texts"
+          placeholder="Search titles, authors, and publishers"
           valueLink={this.linkState('query')}
           onKeyPress={this.onKeyPress}
           onKeyUp={this.onKeyUp}
